@@ -6,6 +6,7 @@ import pandas as pd
 from sklearn.compose import ColumnTransformer
 
 from sklearn.impute import SimpleImputer
+from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder,StandardScaler
 
 
@@ -25,9 +26,28 @@ class DataTransformation:
 
     def get_data_transformer_object(self):
         try:
-            numerical_column=["Age","Mother_Eductaion","Past_Class_Failures","Day_Drugs_Consumption","Health_Status","Abscence"] 
+            numerical_column= ['Mother_Eductaion', 'Revision_Time', 'Father_Education','Age','Past_Class_Failures','Abscence']
+            categorical_data=['Wants_Higher_Education','Week_Drugs_Consumption','Extra_Activities','Internet_Access']
+ #pipline pour remplacer les valeures manquants par la mediane , et standariser les donnees       
+            num_pieline = Pipeline(
+                steps=[
+                    ("imputer",SimpleImputer(strategy="median")),
+                    ("scaler",StandardScaler())
+                ]
+            )
+        
+
+            cat_pipeline=Pipeline(
+               
+             steps=[
+                 ("imputer",SimpleImputer(strategy="most_frequent")),
+                 (one)
+             ]
+             )
+           
+           
+        
+        
+        
         except:
             pass
-    
-['Age', 'Mother_Eductaion', 'Father_Education', 'Travel_Time', 'Revision_Time', 'Past_Class_Failures', 'Quality_Family_Relationship', 'Free_Time', 'Go_out', 'Day_Drugs_Consumption', 'Week_Drugs_Consumption', 'Health_Status', 'Abscence', 'First_Periode_Grade', 'Seconde_Periode_Grade', 'Final_Periode_Grade']
-['School', 'Sex', 'Home_Address_Type', 'Family_Size', 'Parents_Cohabitation_Status', 'Mother_Job', 'Father_Job', 'Reason_Choosing_School', 'Guardien', 'Extra_Eductional_Support', 'Family_Educational_Support', 'Extra_Paid_Classes', 'Extra_Activities', 'Attended_Nursery', 'Wants_Higher_Education', 'Internet_Access', 'Romantic_Relationship', 'Final_grade', 'Binned_Revision_Time']
